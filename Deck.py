@@ -23,10 +23,16 @@ class Deck:
         print('Deck has been shuffled')
 
     def deal(self):
+        if len(self.cards) == 0:
+            self.refill_from_reserve()
         return self.cards.pop()
 
     def deal_double(self, deal_type='player'):
+        if len(self.cards) == 0:
+            self.refill_from_reserve()
         card1 = self.cards.pop()
+        if len(self.cards) == 0:
+            self.refill_from_reserve()
         card2 = self.cards.pop()
 
         if deal_type == 'dealer':
@@ -40,4 +46,6 @@ class Deck:
 
     def refill_from_reserve(self):
         self.cards.extend(self.reserve)
+        print('Refilling deck from reserve')
+        self.shuffle()
         self.reserve.clear()

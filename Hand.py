@@ -5,6 +5,7 @@ class Hand:
 
     def __init__(self, cards):
         self.cards = cards
+        self.bust = False
 
     def __str__(self):
         string = ''
@@ -33,6 +34,20 @@ class Hand:
                     for i, value in enumerate(values):
                         values[i] += card.value
         for value in values:
-            if value > 21:
+            if value > 21 and len(values) > 1:
                 values.remove(value)
         return tuple(set(values))
+
+    def check_hand(self):
+        value = self.hand_value()[0]
+        if value > 21:
+            return 'bust'
+        elif value == 21:
+            return 'blackjack'
+        else:
+            return 'good'
+
+    def get_and_remove_cards(self):
+        cards = self.cards
+        self.cards.clear()
+        return cards

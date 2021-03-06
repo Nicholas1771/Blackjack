@@ -2,7 +2,7 @@ from Blackjack import Blackjack
 
 
 def main():
-    Blackjack().start()
+    Blackjack()
 
 
 if __name__ == '__main__':
